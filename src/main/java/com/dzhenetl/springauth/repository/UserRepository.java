@@ -14,14 +14,14 @@ public class UserRepository {
 
     public UserRepository() {
         users = List.of(
-                new User("Иван", "123"),
+                new User("Иван", "123456789"),
                 new User("Петя", "456"
                 ));
     }
 
-    public List<Authorities> getUserAuthorities(String user, String password) {
+    public List<Authorities> getUserAuthorities(User user) {
         return users.stream()
-                .anyMatch(x -> x.getUsername().equals(user) && x.getPassword().equals(password)) ?
+                .anyMatch(x -> x.equals(user)) ?
                 List.of(Authorities.READ, Authorities.WRITE, Authorities.DELETE) :
                 Collections.emptyList();
     }
